@@ -1,21 +1,22 @@
 PODS:
-  - Elements (0.0.1)
+  - Elements (0.0.2)
 
 DEPENDENCIES:
-  - Elements (from `https://github.com/elementspay/ios-sdk-distribution.git`)
+  - Elements (from `https://github.com/elementspay/ios-sdk-distribution.git`, tag `v0.0.2`)
 
 EXTERNAL SOURCES:
   Elements:
     :git: https://github.com/elementspay/ios-sdk-distribution.git
+    :tag: v0.0.2
 
 CHECKOUT OPTIONS:
   Elements:
-    :commit: 55b0d6499f0ee2c323da8f872dfd19be9fe1facd
     :git: https://github.com/elementspay/ios-sdk-distribution.git
+    :tag: v0.0.2
 
 SPEC CHECKSUMS:
-  Elements: 55a3420708ba40e8109912f2617598d4f4f2be2c
+  Elements: 6ffdad9af98b110f9b94d4399919483bf99e973a
 
-PODFILE CHECKSUM: a3583fa2390788d0de6020ba87503ca373eeadac
+PODFILE CHECKSUM: 650de9bd8c10eda244e3df88f2610d827f3d87c2
 
 COCOAPODS: 1.10.1

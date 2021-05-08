@@ -5,6 +5,6 @@ target 'Elements-iOS-Demo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Elements', :git => "https://github.com/elementspay/ios-sdk-distribution.git"
+  pod 'Elements', :tag => 'v0.0.2', :git => "https://github.com/elementspay/ios-sdk-distribution.git"
 
 end
