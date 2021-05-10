@@ -5,6 +5,7 @@ target 'Elements-iOS-Demo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Elements', :tag => 'v0.0.2', :git => "https://github.com/elementspay/ios-sdk-distribution.git"
+	pod 'SnapKit'
+  pod 'Elements', :path => "/Users/marvinzhan/Desktop/element/elements-ios/Elements"
 
 end
