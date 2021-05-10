@@ -60,7 +60,7 @@ final class ViewController: UIViewController {
 			switch result {
 			case .success(let response):
 				if let elementsToken = response.elementsToken {
-					self.presentAlertView(title: "Tokenization success!", message: self.parseElementsTokenToDisplayString(token: elementsToken))
+					self.presentAlertView(title: "Tokenization success!", message: "\(elementsToken)")
 				}
 				if let fallbackStripeToken = response.fallbackStripeToken {
 					self.presentAlertView(title: "Stripe tokenization success!", message: "Stripe: \(fallbackStripeToken)")
