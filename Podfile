@@ -9,6 +9,6 @@ target 'Elements-iOS-Demo' do
 #  pod 'Elements', :tag => '0.0.3', :git => "https://github.com/elementspay/ios-sdk-distribution.git"
 #	pod 'Elements/Card', :tag => '0.0.3', :git => "https://github.com/elementspay/ios-sdk-distribution.git"
 
-  pod 'Elements', :path => "/Users/marvinzhan/Desktop/element/elements-ios/ios-sdk-distribution"
-	pod 'Elements/Card', :path => "/Users/marvinzhan/Desktop/element/elements-ios/ios-sdk-distribution"
+  pod 'Elements', :tag => '0.0.4', :git => "https://github.com/elementspay/iOS-SDK-Distribution.git"
+	pod 'Elements/Card', :tag => '0.0.4', :git => "https://github.com/elementspay/iOS-SDK-Distribution.git"
 end

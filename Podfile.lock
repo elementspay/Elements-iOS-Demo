@@ -1,14 +1,14 @@
 PODS:
-  - Elements (0.0.3):
-    - Elements/Core (= 0.0.3)
-  - Elements/Card (0.0.3):
+  - Elements (0.0.4):
+    - Elements/Core (= 0.0.4)
+  - Elements/Card (0.0.4):
     - Elements/Core
-  - Elements/Core (0.0.3)
+  - Elements/Core (0.0.4)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
-  - Elements (from `/Users/marvinzhan/Desktop/element/elements-ios/ios-sdk-distribution`)
-  - Elements/Card (from `/Users/marvinzhan/Desktop/element/elements-ios/ios-sdk-distribution`)
+  - Elements (from `https://github.com/elementspay/iOS-SDK-Distribution.git`, tag `0.0.4`)
+  - Elements/Card (from `https://github.com/elementspay/iOS-SDK-Distribution.git`, tag `0.0.4`)
   - SnapKit
 
 SPEC REPOS:
@@ -17,12 +17,18 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Elements:
-    :path: "/Users/marvinzhan/Desktop/element/elements-ios/ios-sdk-distribution"
+    :git: https://github.com/elementspay/iOS-SDK-Distribution.git
+    :tag: 0.0.4
+
+CHECKOUT OPTIONS:
+  Elements:
+    :git: https://github.com/elementspay/iOS-SDK-Distribution.git
+    :tag: 0.0.4
 
 SPEC CHECKSUMS:
-  Elements: 14561b2439094c4979f73e84916b4e4604f7aa30
+  Elements: 0512d1cf7c413e54a96fb5773deada862d36698e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: fa4e8696b153b9663d44bb1b5d770629238379d8
+PODFILE CHECKSUM: ff72754849f56b1b6b6ed28d94033f08e5293d7e
 
 COCOAPODS: 1.10.1
