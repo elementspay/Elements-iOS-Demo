@@ -91,9 +91,7 @@ extension ViewController {
 		viewController.willMove(toParent: self)
 		addChild(viewController)
 		view.addSubview(viewController.view)
-		viewController.view.snp.remakeConstraints { make in
-			make.edges.equalToSuperview()
-		}
+		viewController.view.frame = view.frame
 		currentViewController?.willMove(toParent: nil)
 		currentViewController?.view.removeFromSuperview()
 		currentViewController?.removeFromParent()
