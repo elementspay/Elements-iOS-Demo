@@ -7,7 +7,6 @@
 
 import Elements
 import ElementsCard
-import SnapKit
 import UIKit
 
 final class ViewController: UIViewController {
