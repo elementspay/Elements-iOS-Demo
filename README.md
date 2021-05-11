@@ -1,7 +1,6 @@
 # Elements-iOS-SDK Demo
 
-[![Pod](https://img.shields.io/cocoapods/v/Elements.svg?style=flat)](http://cocoapods.org/pods/Adyen)
-[![SwiftPM](https://img.shields.io/badge/swift%20package%20manager-compatible-brightgreen.svg)](https://swiftpackageregistry.com/Adyen/adyen-ios)
+[![Pod](https://img.shields.io/cocoapods/v/Elements.svg?style=flat)](http://cocoapods.org/pods/Elements)
 
 The Elements iOS SDK makes it quick and easy to build an excellent payment experience in your iOS app. We provide powerful and customizable UI screens and elements that can be used out-of-the-box to collect your users' payment details. We also expose the low-level APIs that power those UIs so that you can build fully custom experiences.
 
@@ -34,20 +33,12 @@ The Elements iOS SDK requires Xcode 11 or later and is compatible with apps targ
 
 ## Installation
 
-Elements for iOS are available through either [CocoaPods](http://cocoapods.org) or [Swift Package Manager](https://swift.org/package-manager/).
+Elements for iOS are available through [CocoaPods](http://cocoapods.org).
 
 ### CocoaPods
 
 1. Add `pod 'Elements'` to your `Podfile`.
 2. Run `pod install`.
-
-### Swift Package Manager
-
-1. Follow Apple's [Adding Package Dependencies to Your App](
-https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app
-) guide on how to add a Swift Package dependency.
-2. Use `https://github.com/elementspay/iOS-SDK-Distribution` as the repository URL.
-3. Specify the version to be at least `0.0.5`.
 
 ## Usage
 
@@ -81,8 +72,8 @@ let apiClient: ElementsAPIClient = ElementsAPIClient(
           customerId: nil
         )
       ],
-      // Optional if you want to take fall back to stripe 
-      //if elements tokenization failed
+      // Optional if you want to take fall back to Stripe tokenization
+      // if elements tokenization failed
       stripePublishableKey: stripeTestKey 
     )
 )
@@ -158,4 +149,4 @@ Clone this repo and run `pod install`. The demo app demonstrated how to use `Ele
 
 ## Releases
 
-We support Cocoapods and Swift Package Manager.
+Release notices will get updated here.
