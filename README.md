@@ -22,10 +22,7 @@ Table of contents
 
 **PCI Complaint**: We make it simple for you to collect sensitive data such as credit card numbers and remain [PCI compliant](https://stripe.com/docs/security#pci-dss-guidelines). This means the sensitive data is sent directly to Elements instead of passing through your server
 
-**Apple Pay**: We provide a [seamless integration with Apple Pay](https://stripe.com/docs/apple-pay).
-
-**Elements API**: We provide [low-level APIs](https://stripe.dev/stripe-ios/docs/Classes/STPAPIClient.html) that correspond to objects and methods in the Elements API. You can build your own entirely custom UI on top of this layer, while still taking advantage of utilities like [STPCardValidator](https://stripe.dev/stripe-ios/docs/Classes/STPCardValidator.html) to validate your user’s input.
-
+**Elements API**: We provide [low-level APIs](https://stripe.dev/stripe-ios/docs/Classes/STPAPIClient.html) that correspond to objects and methods in the Elements API.
 
 **Native UI**: (Coming soon in the future) We provide native screens and elements to collect payment details.
 
