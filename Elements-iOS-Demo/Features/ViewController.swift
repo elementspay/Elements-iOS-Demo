@@ -29,7 +29,7 @@ final class ViewController: UIViewController {
 
 	private func presentCardComponent() {
 		let brands: [SupportedCardData] = [
-			"mc", "visa", "amex", "maestro", "cup", "diners", "discover", "jcb"
+			"mc", "visa", "amex", "discover"
 		].map { SupportedCardData(brand: $0) }
 		let config = CardComponent.Configuration(
 			showsHolderNameField: true,
