@@ -10,26 +10,30 @@ import ElementsCard
 import UIKit
 
 final class ViewController: UIViewController {
-	let clientKey = "eyJraWQiOiJlbnYiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MTk5MTI2OTcsIm1lcmNoYW50X2lkIjoiRzQ3R0RWWEhWSlRTRyIsImN1c3RvbWVyX2lkIjoiQTM1WVpVSFpVRVBWUCIsInNjb3BlIjoid3JpdGUiLCJleHBpcmVzX2luIjpudWxsfQ.juA-mnlk6nho7isT9KIeTGbZPEjS5C3OOl6_s_7nbfcppSmaXknaw5hoUvpP39Z4eYoITP4YPKPiPL5_idUGdQA5SLtBohSArkMJvoLci5vyGDvFkFBfivUGnyEPPJlQrtZlrjljjZTO7ZEATqqG5OPbYGTl1rkc-5M7JY0xo_OkEFcIPZ5IzF13mN3Ron-hA8bpOXixF_57m3XwfWcnyS9iYqyxTiJRivp5ltqwsAQDQNZj9VaPdSNRmas88HnKrRTjTDCxPpHytVsqPC9phdJ6DXvfgdtNi7Uy2UrRl4kE_1SKZX0rTDM2PaYYrb4f9MudeF2tZerjnIxxCgDcXg"
 
-	let stripeKey = "pk_test_51HLcaZGIxBPZ7rpaxvAYG4JXt96FrFl5u1T7S4wQh6gKPmNmKsl3tCAARba2Jrce60qolY321XmZuDN3slduuU9900wmEXbYu0"
+	private let clientToken = "TODO: Your client token fetched from backend goes here..."
+	private let stripeKey = "TODO: Optional if you want to provide your Stripe publishable key as a fall back method..."
 
 	private var currentViewController: UIViewController?
 	private var cardComponent: CardComponent?
 
 	private lazy var apiClient: ElementsAPIClient = {
-		return ElementsAPIClient(config: .init(environment: .sandbox(clientKey: clientKey), stripePublishableKey: stripeKey))
+		return ElementsAPIClient(
+			config: .init(
+				environment: .sandbox(clientToken: clientToken),
+				stripePublishableKey: stripeKey
+			)
+		)
 	}()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
 		presentCardComponent()
 	}
 
 	private func presentCardComponent() {
 		let brands: [SupportedCardData] = [
-			"mc", "visa", "amex", "discover"
+			"visa", "master", "discover"
 		].map { SupportedCardData(brand: $0) }
 		let config = CardComponent.Configuration(
 			showsHolderNameField: true,
@@ -45,7 +49,7 @@ final class ViewController: UIViewController {
 			),
 			configuration: config
 		)
-		cardComponent?.environment = .sandbox(clientKey: clientKey)
+		cardComponent?.environment = .sandbox(clientToken: clientToken)
 		cardComponent?.cardComponentDelegate = self
 		cardComponent?.delegate = self
 
@@ -60,13 +64,13 @@ final class ViewController: UIViewController {
 			switch result {
 			case .success(let response):
 				if let elementsToken = response.elementsToken {
-					self.presentAlertView(title: "Tokenization success!", message: "\(elementsToken)")
+					self.presentAlertView(title: "Tokenization success!", message: self.parseElementsTokenToDisplayString(token: elementsToken))
 				}
 				if let fallbackStripeToken = response.fallbackStripeToken {
 					self.presentAlertView(title: "Stripe tokenization success!", message: "Stripe: \(fallbackStripeToken)")
 				}
 			case .failure(let error):
-				if let apiError = error as? APIError {
+				if let apiError = error as? ElementsAPIError {
 					self.presentAlertView(title: "Error", message: apiError.errorMessage)
 				} else {
 					self.presentAlertView(title: "Error", message: error.localizedDescription)
@@ -99,7 +103,16 @@ extension ViewController {
 	}
 
 	private func parseElementsTokenToDisplayString(token: ElementsToken) -> String {
-		return token.pspTokens.reduce("", { $0 + "\($1.pspAccount.pspType.lowercased()): \($1.token)" })
+		var result = "Elements Token Object\n"
+		let pspTokens = token.pspTokens.reduce("", { $0 + "\($1.pspAccount.pspType.lowercased()): \($1.token)" })
+		result += "Psp Tokens\n\(pspTokens)"
+		result += "\nElements Card\n"
+		var cardDisplay = "Card id: \(token.card.id)\n"
+		let brand = token.card.brand ?? "Unknown brand"
+		let last4 = token.card.last4 ?? "Unknown last 4"
+		cardDisplay += "Brand: \(brand)\nLast4: \(last4)"
+		result += cardDisplay
+		return result
 	}
 }
 
