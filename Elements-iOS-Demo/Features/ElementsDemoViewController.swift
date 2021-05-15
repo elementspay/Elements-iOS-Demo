@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ElementsDemoViewController.swift
 //  Elements-iOS-Demo
 //
 //  Created by Tengqi Zhan on 2021-05-08.
@@ -7,15 +7,17 @@
 
 import Elements
 import ElementsCard
+import NetworkMonitor
 import UIKit
 
-final class ViewController: UIViewController {
+final class ElementsDemoViewController: UIViewController {
 
 	private let clientToken = "TODO: Your client token fetched from backend goes here..."
 	private let stripeKey = "TODO: Optional if you want to provide your Stripe publishable key as a fall back method..."
 
 	private var currentViewController: UIViewController?
 	private var cardComponent: CardComponent?
+	private var monitorCoordinator: NetworkMonitorCoordinator?
 
 	private lazy var apiClient: ElementsAPIClient = {
 		return ElementsAPIClient(
@@ -29,6 +31,10 @@ final class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		presentCardComponent()
+	}
+
+	override public func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+		showNetworkMonitor()
 	}
 
 	private func presentCardComponent() {
@@ -54,7 +60,9 @@ final class ViewController: UIViewController {
 		cardComponent?.delegate = self
 
 		guard let cardComponent = cardComponent else { return }
-		replaceScreen(viewController: UINavigationController(rootViewController: cardComponent.viewController))
+		let navVC = UINavigationController(rootViewController: cardComponent.viewController)
+		cardComponent.viewController.navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "network_monitor_image")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavBarButtonTapped)), animated: false)
+		replaceScreen(viewController: navVC)
 	}
 
 	private func tokenizeCard(card: ElementsCardParams) {
@@ -80,7 +88,7 @@ final class ViewController: UIViewController {
 	}
 }
 
-extension ViewController {
+extension ElementsDemoViewController {
 
 	private func presentAlertView(title: String, message: String, completion: (() -> Void)? = nil) {
 		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -116,7 +124,7 @@ extension ViewController {
 	}
 }
 
-extension ViewController: CardComponentDelegate {
+extension ElementsDemoViewController: CardComponentDelegate {
 	func didChangeBIN(_ value: String, component: CardComponent) {
 	}
 
@@ -124,7 +132,7 @@ extension ViewController: CardComponentDelegate {
 	}
 }
 
-extension ViewController: PaymentComponentDelegate {
+extension ElementsDemoViewController: PaymentComponentDelegate {
 	func didSubmit(_ data: PaymentComponentData, from component: PaymentComponent) {
 		guard let cardDetails = data.paymentMethod as? CardDetails else {
 			print("Error: Failed getting card details from payment method.")
@@ -139,5 +147,31 @@ extension ViewController: PaymentComponentDelegate {
 
 	func didFail(with error: Error, from component: PaymentComponent) {
 		print("Opps something went wrong \(error)")
+	}
+}
+
+extension ElementsDemoViewController {
+
+	private func showNetworkMonitor() {
+		guard NetworkMonitor.shared.isEnabled() else { return }
+		monitorCoordinator = NetworkMonitorCoordinator()
+		monitorCoordinator?.delegate = self
+		monitorCoordinator?.start()
+		var topController: UIViewController? = UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController
+		while topController?.presentedViewController != nil {
+			topController = topController?.presentedViewController
+		}
+		topController?.present(monitorCoordinator!.toPresentable(), animated: true)
+	}
+
+	@objc
+	private func rightNavBarButtonTapped() {
+		showNetworkMonitor()
+	}
+}
+
+extension ElementsDemoViewController: NetworkMonitorCoordinatorDelegate {
+	func didDismiss(in coordinator: NetworkMonitorCoordinator) {
+		monitorCoordinator = nil
 	}
 }
