@@ -115,9 +115,9 @@ extension ElementsDemoViewController {
 		let pspTokens = token.pspTokens.reduce("", { $0 + "\($1.pspAccount.pspType.lowercased()): \($1.token)" })
 		result += "Psp Tokens\n\(pspTokens)"
 		result += "\nElements Card\n"
-		var cardDisplay = "Card id: \(token.card.id)\n"
-		let brand = token.card.brand ?? "Unknown brand"
-		let last4 = token.card.last4 ?? "Unknown last 4"
+		var cardDisplay = "Card id: \(token.card?.id ?? "Unknown")\n"
+		let brand = token.card?.brand ?? "Unknown brand"
+		let last4 = token.card?.last4 ?? "Unknown last 4"
 		cardDisplay += "Brand: \(brand)\nLast4: \(last4)"
 		result += cardDisplay
 		return result
