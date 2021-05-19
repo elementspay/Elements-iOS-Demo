@@ -121,6 +121,7 @@
 		87DD25FE2650517200BB15D0 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DD25942650517200BB15D0 /* FilterProtocol.swift */; };
 		87DD25FF2650517200BB15D0 /* NetworkMonitorFilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DD25952650517200BB15D0 /* NetworkMonitorFilterCoordinator.swift */; };
 		87DD26002650517200BB15D0 /* NetworkMonitorFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DD25962650517200BB15D0 /* NetworkMonitorFilterViewController.swift */; };
+		87F4F2512655C544000876D4 /* ActionsDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F4F2502655C544000876D4 /* ActionsDemoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +267,7 @@
 		87DD25942650517200BB15D0 /* FilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
 		87DD25952650517200BB15D0 /* NetworkMonitorFilterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitorFilterCoordinator.swift; sourceTree = "<group>"; };
 		87DD25962650517200BB15D0 /* NetworkMonitorFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitorFilterViewController.swift; sourceTree = "<group>"; };
+		87F4F2502655C544000876D4 /* ActionsDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsDemoViewController.swift; sourceTree = "<group>"; };
 		A7B559DB8C378A9C6FE2E98E /* Pods-Elements-iOS-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Elements-iOS-Demo.release.xcconfig"; path = "Target Support Files/Pods-Elements-iOS-Demo/Pods-Elements-iOS-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		C21F1F7235AD8706F1A80242 /* Pods-NetworkMonitor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkMonitor.debug.xcconfig"; path = "Target Support Files/Pods-NetworkMonitor/Pods-NetworkMonitor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				875A986226473B8B00025FD5 /* ElementsDemoViewController.swift */,
+				87F4F2502655C544000876D4 /* ActionsDemoViewController.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				875A986326473B8B00025FD5 /* ElementsDemoViewController.swift in Sources */,
+				87F4F2512655C544000876D4 /* ActionsDemoViewController.swift in Sources */,
 				875A985F26473B8B00025FD5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
