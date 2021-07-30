@@ -15,7 +15,7 @@ target 'Elements-iOS-Demo' do
 #  pod 'Elements', '1.0.0'
 #	pod 'Elements/Card', '1.0.0'
 
-	pod 'Elements', :tag => '1.0.3', :git => "https://github.com/elementspay/iOS-SDK-Distribution.git"
-	pod 'Elements/Card', :tag => '1.0.3', :git => "https://github.com/elementspay/iOS-SDK-Distribution.git"
-	pod 'Elements/Actions', :tag => '1.0.3', :git => "https://github.com/elementspay/iOS-SDK-Distribution.git"
+  pod 'ElementsListKit', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
+	pod 'Elements', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
+#  pod 'Stripe', :path=> '/Users/marvinzhan/Desktop/element/elements-ios/stripe-ios'
 end

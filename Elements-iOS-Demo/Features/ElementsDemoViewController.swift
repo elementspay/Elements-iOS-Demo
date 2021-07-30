@@ -6,8 +6,6 @@
 //
 
 import Elements
-import ElementsActions
-import ElementsCard
 import NetworkMonitor
 import UIKit
 
@@ -17,7 +15,7 @@ final class ElementsDemoViewController: UIViewController {
 	private let stripeKey = "TODO: Optional if you want to provide your Stripe publishable key as a fall back method..."
 
 	private var currentViewController: UIViewController?
-	private var cardComponent: CardComponent?
+	private var cardComponent: CardElement?
 	private var monitorCoordinator: NetworkMonitorCoordinator?
 
 	private lazy var apiClient: ElementsAPIClient = {
@@ -42,12 +40,12 @@ final class ElementsDemoViewController: UIViewController {
 		let brands: [SupportedCardData] = [
 			"visa", "master", "discover"
 		].map { SupportedCardData(brand: $0) }
-		let config = CardComponent.Configuration(
+		let config = CardElement.Configuration(
 			showsHolderNameField: true,
 			showsStorePaymentMethodField: false,
 			billingAddressMode: .none
 		)
-		cardComponent = CardComponent(
+		cardComponent = CardElement(
 			paymentMethod: CardPaymentMethod(
 				type: "scheme",
 				name: "Elements Demo",
@@ -56,8 +54,8 @@ final class ElementsDemoViewController: UIViewController {
 			),
 			configuration: config
 		)
-		cardComponent?.environment = .sandbox(clientToken: clientToken)
-		cardComponent?.cardComponentDelegate = self
+    cardComponent?.environment = .portForward(clientToken: clientToken)
+		cardComponent?.cardElementDelegate = self
 		cardComponent?.delegate = self
 
 		guard let cardComponent = cardComponent else { return }
@@ -125,16 +123,16 @@ extension ElementsDemoViewController {
 	}
 }
 
-extension ElementsDemoViewController: CardComponentDelegate {
-	func didChangeBIN(_ value: String, component: CardComponent) {
+extension ElementsDemoViewController: CardElementDelegate {
+  func didChangeBIN(_ value: String, element: CardElement) {
 	}
 
-	func didChangeCardBrand(_ value: [CardBrand]?, component: CardComponent) {
+  func didChangeCardBrand(_ value: [CardBrand]?, element: CardElement) {
 	}
 }
 
-extension ElementsDemoViewController: PaymentComponentDelegate {
-	func didSubmit(_ data: PaymentComponentData, from component: PaymentComponent) {
+extension ElementsDemoViewController: PaymentElementDelegate {
+	func didSubmit(_ data: PaymentElementData, from component: PaymentElement) {
 		guard let cardDetails = data.paymentMethod as? CardDetails else {
 			print("Error: Failed getting card details from payment method.")
 			return
@@ -146,7 +144,7 @@ extension ElementsDemoViewController: PaymentComponentDelegate {
 		tokenizeCard(card: card)
 	}
 
-	func didFail(with error: Error, from component: PaymentComponent) {
+	func didFail(with error: Error, from component: PaymentElement) {
 		print("Opps something went wrong \(error)")
 	}
 }
