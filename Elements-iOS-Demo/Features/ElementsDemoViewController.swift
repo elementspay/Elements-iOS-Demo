@@ -42,7 +42,7 @@ final class ElementsDemoViewController: UIViewController {
 		].map { SupportedCardData(brand: $0) }
 		let config = CardElement.Configuration(
 			showsHolderNameField: true,
-			showsStorePaymentMethodField: false,
+			showsStorePaymentMethodField: false, // TODO
 			billingAddressMode: .none
 		)
 		cardComponent = CardElement(
@@ -111,8 +111,7 @@ extension ElementsDemoViewController {
 
 	private func parseElementsTokenToDisplayString(token: ElementsToken) -> String {
 		var result = "Elements Token Object\n"
-		let pspTokens = token.pspTokens.reduce("", { $0 + "\($1.pspAccount.pspType.lowercased()): \($1.token)" })
-		result += "Psp Tokens\n\(pspTokens)"
+    result += "Token \n\(token.id)"
 		result += "\nElements Card\n"
 		var cardDisplay = "Card id: \(token.card?.id ?? "Unknown")\n"
 		let brand = token.card?.brand ?? "Unknown brand"

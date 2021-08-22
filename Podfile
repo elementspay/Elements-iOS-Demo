@@ -17,5 +17,6 @@ target 'Elements-iOS-Demo' do
 
   pod 'ElementsListKit', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
 	pod 'Elements', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
+  pod 'Elements/Elements3DS2', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
 #  pod 'Stripe', :path=> '/Users/marvinzhan/Desktop/element/elements-ios/stripe-ios'
 end
