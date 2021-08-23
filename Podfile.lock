@@ -1,11 +1,7 @@
 PODS:
-  - Elements (1.0.3):
-    - Elements/Core (= 1.0.3)
-  - Elements/Actions (1.0.3):
-    - Elements/Core
-  - Elements/Card (1.0.3):
-    - Elements/Core
-  - Elements/Core (1.0.3)
+  - Elements (1.1.3):
+    - Elements/Core (= 1.1.3)
+  - Elements/Core (1.1.3)
   - IGListDiffKit (4.0.0)
   - IGListKit (4.0.0):
     - IGListDiffKit (= 4.0.0)
@@ -13,9 +9,7 @@ PODS:
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
-  - Elements (from `https://github.com/elementspay/iOS-SDK-Distribution.git`, tag `1.0.3`)
-  - Elements/Actions (from `https://github.com/elementspay/iOS-SDK-Distribution.git`, tag `1.0.3`)
-  - Elements/Card (from `https://github.com/elementspay/iOS-SDK-Distribution.git`, tag `1.0.3`)
+  - Elements (from `https://github.com/elementspay/iOS-SDK-Distribution.git`, tag `1.1.3`)
   - IGListKit
   - SnapKit
   - SwiftyJSON
@@ -30,20 +24,20 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Elements:
     :git: https://github.com/elementspay/iOS-SDK-Distribution.git
-    :tag: 1.0.3
+    :tag: 1.1.3
 
 CHECKOUT OPTIONS:
   Elements:
     :git: https://github.com/elementspay/iOS-SDK-Distribution.git
-    :tag: 1.0.3
+    :tag: 1.1.3
 
 SPEC CHECKSUMS:
-  Elements: 4f97af11df5f826d773ae9076a2fe9bf222f2ba0
+  Elements: 2a015229315e931c5909de58fc4c0e690e0cff91
   IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
   IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 0d2065cc14f4b70a731bf1ac27a17bafae967ca9
+PODFILE CHECKSUM: 73f9521f281035d2f5ae65c2e7f7a7695c972897
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

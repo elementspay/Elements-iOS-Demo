@@ -5,7 +5,8 @@
 //  Created by Tengqi Zhan on 2021-05-19.
 //
 
-import ElementsActions
+import IGListKit
+import Elements
 import UIKit
 
 final class ActionsDemoViewController: UIViewController {
@@ -14,12 +15,11 @@ final class ActionsDemoViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
 		startDriver()
 	}
 
 	private func startDriver() {
-		driver = ElementsActionDriver(environment: .production(clientToken: clientToken), completionDelegate: self, presentingDelegate: self, style: nil)
+    driver = ElementsActionDriver(configuration: .init(environment: .production(clientToken: clientToken), returnURLScheme: "", style: nil), completionDelegate: self, presentingDelegate: self)
 		driver?.requestKakaoPaySetup()
 	}
 }
