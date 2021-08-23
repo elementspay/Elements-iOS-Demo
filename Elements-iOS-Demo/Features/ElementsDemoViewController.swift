@@ -11,7 +11,7 @@ import UIKit
 
 final class ElementsDemoViewController: UIViewController {
 
-	private let clientToken = "TODO: Your client token fetched from backend goes here..."
+	private let clientToken = "eyJraWQiOiJlbnYiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Mjk0OTc0NjksIm1lcmNoYW50X2lkIjoiTUVSLU1BNXZqVGdMd1REQjVtWGdyeG45R2duYyIsImN1c3RvbWVyX2lkIjoiQ1VTLWVwTnd0bzRNUHNXeUhOOGJLZVlFelgzaiIsImV4dGVybmFsX2N1c3RvbWVyX2lkIjoiMTIzZTQ1NjctZTg5Yi0xMmQzLWE0NTYtNDI2NjE0MTc0MDAwIiwic2NvcGUiOiJyZWFkIHdyaXRlIn0.PXG07cHyC0f5IsaUZurZKNEV2Adhjw39kqANY-VEQMvuz250VAIbnBqOqH64Zq4Xiv_sadC5YCYekxDfiEOylMgQIAPPnFqPPeh4oAWUuBlC7Qh12M7zP1JXvqb7mG5kIB9Dovvq36NgpSwDlRlNJ7KS824z3dPA9meD5Ryw1mVUkFSjsW0AOgCJaT3TrzoXmCRd8sJslPAq1hmOWuRldjMURKd3r_RxwaL0Syv65bm6TR9z5Y0xvAvztENSG7CdQhiuyeKvBA0zU4X_LNV7zjC7jmM5it4aHwNl3CfN9s1Nu9vBqi5s3QlnJNALhI64_0EGV0TX_J8_wyecAIJdCw"
 	private let stripeKey = "TODO: Optional if you want to provide your Stripe publishable key as a fall back method..."
 
 	private var currentViewController: UIViewController?
@@ -65,7 +65,7 @@ final class ElementsDemoViewController: UIViewController {
 	}
 
 	private func tokenizeCard(card: ElementsCardParams) {
-		apiClient.tokenizeCard(data: card) { [weak self] result in
+		apiClient.tokenizeCard(data: card, authContext: self) { [weak self] result in
 			guard let self = self else { return }
 			self.cardComponent?.stopLoadingIfNeeded()
 			switch result {
@@ -128,6 +128,20 @@ extension ElementsDemoViewController: CardElementDelegate {
 
   func didChangeCardBrand(_ value: [CardBrand]?, element: CardElement) {
 	}
+}
+
+extension ElementsDemoViewController: ElementsAuthenticationContext {
+  func elementsAuthHostController() -> UIViewController {
+    return self
+  }
+
+  func authContextWillAppear() {
+    print("3DS Auth controller appear...")
+  }
+
+  func authContextWillDisappear() {
+    print("3DS Auth controller disppear...")
+  }
 }
 
 extension ElementsDemoViewController: PaymentElementDelegate {
