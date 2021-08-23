@@ -12,11 +12,5 @@ target 'Elements-iOS-Demo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-#  pod 'Elements', '1.0.0'
-#	pod 'Elements/Card', '1.0.0'
-
-  pod 'ElementsListKit', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
-	pod 'Elements', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
-  pod 'Elements/Elements3DS2', :path => '/Users/marvinzhan/Desktop/element/elements-ios/Elements'
-#  pod 'Stripe', :path=> '/Users/marvinzhan/Desktop/element/elements-ios/stripe-ios'
+  pod 'Elements', :tag => '1.1.3', :git => "https://github.com/elementspay/iOS-SDK-Distribution.git"
 end
