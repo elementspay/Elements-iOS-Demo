@@ -1,7 +1,7 @@
 PODS:
-  - Elements (1.1.3):
-    - Elements/Core (= 1.1.3)
-  - Elements/Core (1.1.3)
+  - Elements (1.1.8):
+    - Elements/Core (= 1.1.8)
+  - Elements/Core (1.1.8)
   - IGListDiffKit (4.0.0)
   - IGListKit (4.0.0):
     - IGListDiffKit (= 4.0.0)
@@ -9,35 +9,26 @@ PODS:
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
-  - Elements (from `https://github.com/elementspay/iOS-SDK-Distribution.git`, tag `1.1.3`)
+  - Elements
   - IGListKit
   - SnapKit
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
+    - Elements
     - IGListDiffKit
     - IGListKit
     - SnapKit
     - SwiftyJSON
 
-EXTERNAL SOURCES:
-  Elements:
-    :git: https://github.com/elementspay/iOS-SDK-Distribution.git
-    :tag: 1.1.3
-
-CHECKOUT OPTIONS:
-  Elements:
-    :git: https://github.com/elementspay/iOS-SDK-Distribution.git
-    :tag: 1.1.3
-
 SPEC CHECKSUMS:
-  Elements: 2a015229315e931c5909de58fc4c0e690e0cff91
+  Elements: d0959994d8cae473990d35950feda80582f908ca
   IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
   IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 73f9521f281035d2f5ae65c2e7f7a7695c972897
+PODFILE CHECKSUM: 3adb0c93a7d41e06442f28a12839534c723c68a2
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2
