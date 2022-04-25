@@ -27,60 +27,40 @@ Table of contents
 
 ## Requirements
 
-The Elements iOS SDK requires Xcode 11 or later and is compatible with apps targeting iOS 11 or above. 
-
-## Getting Started
+The Elements iOS SDK requires Xcode 11 or later and is compatible with apps targeting iOS 11 or above.
 
 ## Installation
 
-Elements for iOS are available through [CocoaPods](http://cocoapods.org).
+Elements for iOS are available through CocoaPods.
 
 ### CocoaPods
 
-1. Add `pod 'Elements'` to your `Podfile`.
-2. Run `pod install`.
+Add `pod 'Elements'` to your Podfile.
+Run `pod install`.
 
 ## Usage
 
 ### ElementsAPIClient
 
-The [ElementsAPIClient] handles the low level api communications to Elements server. i.e. Card Tokenization
+The `ElementsAPIClient` handles the low-level API communications to Elements server. i.e. Card Tokenization
 
-#### Initialize the API client.
+### Initialize the API client
 
-The api client requires `clientKey` fetched from your backend server. Once you have obtained your `clientKey` you can initialize the api client in the following way.
+The API client requires clientToken fetched from your backend server. Once you have obtained your client key you can initialize the API client in the following way.
 
 ```swift
 let apiClient: ElementsAPIClient = ElementsAPIClient(
     config: .init(
-      environment: .sandbox(clientKey: clientKey),
-      // Optional feild if you want to provide your psp customer info.
-      pspCustomers: [
-        PspCustomer(
-          pspAccount: PspAccount(
-            pspType: .stripe, 
-            accountId: "Your stripe account id obtained from elements goes here"
-          ), 
-          // Customer id associated with the account, this is only applicable to Stripe
-          customerId: "Your stripe customer Id, usually starts with cus_" 
-        ),
-        PspCustomer(
-          pspAccount: PspAccount(
-            pspType: .adyen, 
-            accountId: "Your adyen account id obtained from elements goes here"
-          ), 
-          customerId: nil
-        )
-      ],
-      // Optional if you want to take fall back to Stripe tokenization
-      // if elements tokenization failed
+      // Configure your environment, eg. production vs sandbox
+      environment: .production(clientToken: clientToken),
+      // Optional if you want to take fall back to stripe 
+      //if elements tokenization failed
       stripePublishableKey: stripeTestKey 
     )
 )
 ```
 
-In order to call the tokenize api, you need to create and pass in `ElementsCardParams` object, example:
-
+In order to call the tokenize API, you need to create and pass in the `ElementsCardParams` object, for example:
 ```swift
 let card = ElementsCardParams(
   cardNumber: "4242424242424242", 
@@ -90,9 +70,7 @@ let card = ElementsCardParams(
   holderName: "Test"
 )
 ```
-
 Once you have created the `ElementsAPIClient` and `ElementsCardParams` you can call the following to tokenize a card.
-
 ```swift
 apiClient.tokenizeCard(data: card) { result in
   switch result {
@@ -116,18 +94,11 @@ apiClient.tokenizeCard(data: card) { result in
 
 ### ElementsToken
 
-The `ElementsToken` struct returns the response received from Elements server once tokenization succeeded. It contains the corresponded tokens matching the `[PspCustomer]` you have configured in `ElementsAPIClient`. It will also contains a `ElementsCardResponse` object that has the tokenized card info.
+The ElementsToken struct returns the response received from Elements server once tokenization succeeded. It contains the corresponded elements token matching the `ElementsCardParams` you passed in the method. It will also contain an `ElementsCardResponse` object that has the tokenized card info.
 
-```swift
+```
 ▿ ElementsToken
-  ▿ pspTokens : 1 element
-    ▿ 0 : PspToken
-      ▿ pspAccount : PspAccount
-        - pspType : "STRIPE"
-        ▿ accountId : Optional<String>
-          - some : "xxxxxxxxxxxxx"
-      - customerId : nil
-      - token : "tok_xxxxxxxxxxxxxxx"
+  ▿ id : "tok_xxxxxxxxxxxxxxx
   ▿ card : ElementsCardResponse
     - id : "card-9a0bb04b-f5fb-4b3c-9129-15ae830ed585"
     ▿ last4 : Optional<String>
@@ -142,10 +113,57 @@ The `ElementsToken` struct returns the response received from Elements server on
       - some : "w98Ef4AjZdgXlfBgzfYa4jnorJSFGHrH1ilsXw2xwl4="
 ```
 
+### 3DS2 Flow
 
-### Example App
+`ElementsAPIClient` also supports tokenize card with 3DS2 auth flow enabled. In order to handle 3DS2 flow correctly you need to pass a authContext param to the tokenization method.
 
-Clone this repo and run `pod install`. The demo app demonstrated how to use `ElementsAPIClient`.
+```swift
+private func tokenizeCard(card: ElementsCardParams) {
+  apiClient.tokenizeCard(data: card, authContext: self) { [weak self] result in
+    guard let self = self else { return }
+    self.cardComponent?.stopLoadingIfNeeded()
+    switch result {
+    case .success(let response):
+      if let elementsToken = response.elementsToken {
+        print("Tokenization success! Check elements token object.")
+      }
+      if let fallbackStripeToken = response.fallbackStripeToken {
+        print("Stripe tokenization success!")
+      }
+    case .failure(let error):
+      if let apiError = error as? ElementsAPIError {
+        print(apiError.errorMessage)
+      } else {
+        print(error.localizedDescription)
+      }
+    }
+  }
+}
+```
+To conform to the protocol you need to do the following:
+```swift
+extension YourViewController: ElementsAuthenticationContext {
+  
+  // Required, usually this gonna be your main controller hosting other view controllers.
+  func elementsAuthHostController() -> UIViewController {
+    return self
+  }
+
+  // Optional if you want to listen when the 3DS2 flow will begin.
+  func authContextWillAppear() {
+    print("3DS Auth controller appear...")
+  }
+
+  // Optional if you want to listen when the 3DS2 flow dismissed.
+  func authContextWillDisappear() {
+    print("3DS Auth controller disppear...")
+  }
+}
+```
+
+## Example App
+
+Clone this repo and run `pod install` and then open `Elements-iOS-Demo.xcworkspace`. The demo app demonstrated how to use `ElementsAPIClient`.
 
 ## Releases
 
